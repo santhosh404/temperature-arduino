@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <style>
+      .body {
+        background-color: rgb(228, 229, 247);
+      }
+
+      .mail-info {
+        font-family: Nunito, sans-serif;
+        display:flex;
+        width: 350px;
+        /* margin-left: 38%; */
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding: 20px 36px;
+        border-radius: 8px;
+        background: white;
+        letter-spacing: 0.3px;
+        box-shadow: 0px 12px 17px rgba(0, 0, 0, 0.26);
+        font-weight: 600;
+      }
+
+      img {
+        height: 36px;
+        margin-right: 16px;
+      }
+
+      .mail-text {
+        font-size: 20px;
+      }
+
+      [tooltip] {
+        position: relative;
+      }
+
+      [tooltip]::before {
+        content: "";
+        position: absolute;
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 4px 6px 0 6px;
+        border-style: solid;
+        border-color: #fff transparent transparent transparent;
+        z-index: 50;
+        opacity: 0;
+        transition: all 250ms ease;
+      }
+
+      [tooltip]::after {
+        content: attr(tooltip);
+        position: absolute;
+        left: 50%;
+        top: -6px;
+        transform: translateX(-50%) translateY(-100%);
+        background: #fff;
+        text-align: center;
+        color: #00afda;
+        padding: 4px 8px;
+        font-size: 14px;
+        min-width: 10px;
+        border-radius: 4px;
+        pointer-events: none;
+        opacity: 0;
+        transition: all 250ms ease;
+      }
+
+      [tooltip-position="bottom"]::before {
+        top: 100%;
+        margin-top: 36px;
+        transform: translateX(-50%) translatey(-100%) rotate(-180deg);
+      }
+
+      [tooltip-position="bottom"]::after {
+        top: 100%;
+        margin-top: 36px;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      [tooltip]:hover::after,
+      [tooltip]:hover::before {
+        opacity: 1;
+      }
+      nav {
+        margin-left: 4%;
+        margin-right: 4%;
+        margin-top: 2%;
+        border-radius: 10px;
+      }
+      .whole {
+        margin-top: 50px;
+      }
+      .navbar-nav .nav-item{
+        padding-left:10px;
+        padding-right: 10px;
+      }
+
+
+  @media only screen and (max-width: 768px) {
+    .mail-info {
+        font-family: Nunito, sans-serif;
+        display:flex;
+        width: 270px;
+        margin-left: 5%;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        padding: 20px 20px;
+        border-radius: 8px;
+        background: white;
+        letter-spacing: 0.3px;
+        box-shadow: 0px 12px 17px rgba(0, 0, 0, 0.26);
+        font-weight: 600;
+      }
+
+      img {
+        height: 20px;
+        margin-right: 16px;
+      }
+      nav {
+        margin-left: 2%;
+        margin-top: 2%;
+        border-radius: 10px;
+      }
+      .user{
+        font-size: larger;
+        font-weight: bold;
+      }
+}
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="container-fluid body">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand">
+        <!-- <img
+          src="https://www.freepnglogos.com/uploads/logo-website-png/logo-website-website-icon-with-png-and-vector-format-for-unlimited-22.png"
+          alt=""
+          width="30"
+          height="30"
+          class="d-inline-block align-text-top"
+        /> -->
+        <h3 style="display: inline-block;" class="user">
+          Welcome, {{user.username}}!
+        </h3>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a href="{% url 'visualize' %}">
+        <button class="btn btn-success my-2 my-sm-0" type="submit">
+          Visualize
+        </button>
+      </a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'logout' %}">
+        <button class="btn btn-danger my-2 my-sm-0" type="submit">
+          Logout
+        </button>
+      </a>
+      </li>
+      
+    
+  </div>
+</nav>
+
+     
+
+    <div class="whole">
+      <center>
+        <h4>Your API key is :</h4>
+      </center>
+     <center>
+      <span class="mail-info">
+        <img
+          src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png"
+          alt="eMail Icon"
+        />
+
+        <span
+          class="mail-text"
+          tooltip="Click to Copy"
+          tooltip-position="bottom"
+        >
+          <div class="fluid">
+            {% for i in data %}{{i.api}}{% endfor %}
+          </div></span
+        >
+      </span>
+     </center> 
+      
+    </div>
+
+    <!-- SCRIPTS -->
+
+    <script>
+      const copyMailId = document.querySelectorAll(".mail-text");
+
+      copyMailId.forEach((copyText) => {
+        copyText.addEventListener("click", () => {
+          const selection = window.getSelection();
+          const range = document.createRange();
+          range.selectNodeContents(copyText);
+          selection.removeAllRanges();
+          selection.addRange(range);
+
+          try {
+            document.execCommand("copy");
+            selection.removeAllRanges();
+
+            const mailId = copyText.textContent;
+            copyText.textContent = "Copied!";
+            copyText.classList.add("success");
+
+            setTimeout(() => {
+              copyText.textContent = mailId;
+              copyText.classList.remove("success");
+            }, 1000);
+          } catch (e) {
+            copyText.textContent = "Couldn't copy, hit Ctrl+C!";
+            copyText.classList.add("error");
+
+            setTimeout(() => {
+              errorMsg.classList.remove("show");
+            }, 1200);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

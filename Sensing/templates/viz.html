@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="refresh" content="10" />
+    <title>Temparature and Humidity</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.4.1/dist/chart.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+      canvas {
+        padding: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <center class="row">
+      <h1>Visualization of <b>Temperature</b> and <b>Humidity</b></h1>
+    </center>
+    <div class="container">
+      <h4 style="float: right; font-weight: bold">
+        Total Records
+        <span style="font-size: 15px" class="badge badge-danger">
+          {% if length %} {{length}} {% endif %}
+        </span>
+      </h4>
+    </div>
+    <hr />
+    <center>
+      <div>
+        {% if record %}
+        <div class="container">
+          <h4 style="display: block">{{record}}</h4>
+        </div>
+        {% endif %}
+      </div>
+    </center>
+
+    <div class="row">
+      <div class="col-md-6">
+        <canvas id="myChart" width="100px" height="100px"></canvas>
+      </div>
+      <div class="col-md-6">
+        <canvas id="myChart1" width="50px" height="50px"></canvas>
+      </div>
+    </div>
+
+    <script>
+
+
+
+      console.log({{ data|safe }});
+      var data={{ data|safe }};
+      var temp=[]
+      var humi=[]
+      var tim=[]
+      for (let i in data){
+          tim.push(data[i].tim)
+          temp.push(data[i].temperature)
+          humi.push(data[i].humidity)
+      }
+
+      console.log(temp);
+      // var temp = JSON.parse("{{ data }}");
+      // var humi = JSON.parse("{{ humidity }}");
+      // var tim  = "{{time}}"
+
+      console.log(tim)
+      // var tim = JSON.parse("{{ date }}");
+
+      var ctx = document.getElementById("myChart").getContext("2d");
+      var ctx1 = document.getElementById("myChart1").getContext("2d");
+
+      var myChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: tim,
+          datasets: [
+            {
+              label: "Temperature",
+              data: temp,
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+      var myChart1 = new Chart(ctx1, {
+        type: "line",
+        data: {
+          labels: tim,
+          datasets: [
+            {
+              label: "Humidity",
+              data: humi,
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(255, 206, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+              ],
+              borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+                "rgba(75, 192, 192, 1)",
+                "rgba(153, 102, 255, 1)",
+                "rgba(255, 159, 64, 1)",
+              ],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
