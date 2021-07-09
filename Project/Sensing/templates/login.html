@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      body {
+        background-color: rgb(228, 229, 247);
+      }
+      a {
+        text-decoration: none;
+      }
+
+      .card {
+        font-family: sans-serif;
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 3em;
+        margin-bottom: 3em;
+        border-radius: 10px;
+        background-color: #ffff;
+        padding: 1.8rem;
+        box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .title {
+        text-align: center;
+        font-weight: bold;
+        margin: 0;
+      }
+      .subtitle {
+        text-align: center;
+        font-weight: bold;
+      }
+      .btn-text {
+        margin: 0;
+      }
+
+      .email-login {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+      }
+      .email-login label {
+        color: rgb(170 166 166);
+      }
+
+      input[type="text"],
+      input[type="password"] {
+        padding: 15px 20px;
+        margin-top: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+      }
+
+      .cta-btn {
+        background-color: rgb(69, 69, 185);
+        color: white;
+        padding: 18px 20px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+        border-radius: 10px;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <form method="POST">
+        {% csrf_token %}
+        <h2 class="title">Log in</h2>
+
+        <div class="email-login">
+          <label for="email"> <b>Username</b></label>
+          <input
+            type="text"
+            placeholder="Enter Username"
+            name="name"
+            required
+          />
+          <label for="psw"><b>Password</b></label>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            required
+          />
+        </div>
+        <button class="cta-btn">Log In</button>
+        <p class="subtitle">
+          Don't have an account? <a href="{% url 'register' %}">Register</a>
+        </p>
+      </form>
+    </div>
+    {% if mess %}
+    <script>
+      alert("{{mess}}");
+    </script>
+    {% endif %}
+  </body>
+</html>
